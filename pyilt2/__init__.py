@@ -126,10 +126,10 @@ def query(comp='', numOfComp=0, year='', author='', keywords='', prop=''):
         keyw=keywords,
         prp=prp
     )
-    print(params)
+    #print(params)
     r = requests.get(searchUrl, params=params)
     resDict = r.json()
-    print(resDict)
+    #print(resDict)
     if len(resDict['errors']) > 0:
         e = " *** ".join(resDict['errors'])
         raise queryError(e)
