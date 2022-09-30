@@ -107,12 +107,14 @@ def query(comp='', numOfComp=0, year='', author='', keywords='', prop=''):
     """
     if prop:
         print(f"search with a property hash key: {prop}")
+        """
         if prop not in abr2prop.keys():
             raise propertyError(prop)
         else:
             # prp = properties[prop][0]
             prp = abr2key[prop]
             #prp = "aZvO"
+        """
     else:
         prp = ''
     params = dict(
