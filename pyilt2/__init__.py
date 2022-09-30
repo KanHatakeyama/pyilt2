@@ -115,6 +115,7 @@ def query(comp='', numOfComp=0, year='', author='', keywords='', prop=''):
             prp = abr2key[prop]
             #prp = "aZvO"
         """
+        prp=prop
     else:
         prp = ''
     params = dict(
