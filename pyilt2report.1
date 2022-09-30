@@ -1,0 +1,248 @@
+.\" Man page generated from reStructuredText.
+.
+.TH "PYILT2REPORT" "1" "May 22, 2018" "0.9.8" "pyILT2"
+.SH NAME
+pyilt2report \- A search and report tool for ILThermo v2.0.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.SH SYNOPSIS
+.sp
+\fBpyilt2report\fP [\fIoptions\fP]
+.SH DESCRIPTION
+.sp
+\fBpyilt2report\fP makes a search request to the Ionic Liquids Database (ILThermo v2.0)  \fI\%http://ilthermo.boulder.nist.gov\fP
+operated by the National Institute of Standards and Technology (NIST).
+The result of the query will be written in separated folder, as a \fBreport.txt\fP storing the metadata and
+for each hit a \fBref%.dat\fP file containing the data in cvs format with header.
+.SH OPTIONS
+.sp
+\fISearch Options:\fP
+.sp
+The following options represent the different search fields of the web search
+form of the NIST database web frontend. You have to define at least one of the
+search options.
+.INDENT 0.0
+.TP
+\fB\-c\fP
+Chemical formula, CAS registry number, or name (part or full)
+.TP
+\fB\-n\fP
+Number of mixture components. Default: 0 = any number.
+.TP
+\fB\-y\fP
+Publication year
+.TP
+\fB\-a\fP
+Author’s last name
+.TP
+\fB\-k\fP
+Keyword(s)
+.TP
+\fB\-p\fP
+Physical property by abbreviation.
+With \fB\-\-props\fP you get a list of available properties and its abbreviation.
+.UNINDENT
+.sp
+\fIControl Options:\fP
+.INDENT 0.0
+.TP
+\fB\-o, \-\-out\fP
+Result folder for output files. By default the folder is named like: \fBpilt2report_2018\-03\-20_20:20:42\fP\&.
+.TP
+\fB\-\-doi\fP
+Resolve DOI from citation (experimental!).
+Because unfortunately the data set from NIST includes just the citation but \fInot\fP the DOI.
+Therefore we use the Crossref REST API (\fI\%https://github.com/CrossRef/rest\-api\-doc\fP) to
+resolve the DOI.
+.TP
+\fB\-\-auto\fP
+Don\(aqt ask if to proceed creating report, just do it!
+.UNINDENT
+.sp
+\fIProgram Information:\fP
+.INDENT 0.0
+.TP
+\fB\-h\fP, \fB\-\-help\fP
+Output a usage message and exit.
+.TP
+\fB\-\-version\fP
+Output the version number of pyilt2report and exit.
+.TP
+\fB\-\-props\fP
+Output a list of the physical properties and its abbreviation an exit.
+.UNINDENT
+.SH EXAMPLE
+.sp
+As an example lets look up for densities of pure Emim SCN:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ pyilt2report \-c \(aq1\-ethyl\-3\-methylimidazolium thiocyanate\(aq \-n 1 \-p \(aqdens\(aq \-\-doi
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+After a short waiting time, it will return a summary of the result:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Make query to NIST... done! (12 hits)
+
+   # ref                  prop     np components(s)
+\-\-\-\- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \-\-\-\-\-\- \-\-\-\- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+   0 Krolikowska2012      dens     65 1\-ethyl\-3\-methylimidazolium thiocyanate
+   1 Klomfar2015a         dens     37 1\-ethyl\-3\-methylimidazolium thiocyanate
+   2 Freire2011           dens     18 1\-ethyl\-3\-methylimidazolium thiocyanate
+ ...
+  11 McHale2008           dens      1 1\-ethyl\-3\-methylimidazolium thiocyanate
+
+Proceed? [Y]/n
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+If you know proceed, the (meta) data for all listed references will be pulled from NIST.
+Unfortunately the data set from NIST includes just the citation but \fInot\fP the DOI for a data set.
+With the option \fB\-\-doi\fP the Crossref REST API (\fI\%https://github.com/CrossRef/rest\-api\-doc\fP)
+is used to try to resolve the DOI.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+Request data sets from NIST:
+ >> Krolikowska and Hofman (2012) [ZcjFu] ... done!
+ >> Klomfar et al. (2015a) [EffsN] ... done!
+ >> Freire et al. (2011) [VMvPG] ... done!
+ ...
+ >> McHale et al. (2008) [JUCzp] ... done!
+
+Write report to folder: pyilt2report_2018\-04\-13_22:42:15
+ << report.txt
+ << ref0.dat [ZcjFu]
+ >> resolve DOI ... 10.1016/j.tca.2011.11.009 (score: 127.798130) done!
+ << ref1.dat [EffsN]
+ >> resolve DOI ... 10.1021/acs.jced.5b00074 (score: 133.175660) done!
+ << ref2.dat [VMvPG]
+ >> resolve DOI ... 10.1021/je200790q (score: 132.093030) done!
+ ...
+ << ref11.dat [JUCzp]
+ >> resolve DOI ... 10.1021/ac800490q (score: 131.997470) done!
+
+pyilt2report finished!
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+All files are now stored in a new folder, here its \fB\&./pyilt2report_2018\-04\-13_22:42:15\fP\&.
+The meta data of the request is stored in \fBreport.txt\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+13. Apr. 2018 (22:42:15)
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
+
+Ref. #0
+==========
+Property:
+  Specific density
+Reference:
+  "Densities, isobaric expansivities and isothermal compressibilities [...].",
+  Krolikowska, M.; Hofman, T. (2012) Thermochim. Acta 530, 1\-6.
+Component(s):
+  1) 1\-ethyl\-3\-methylimidazolium thiocyanate
+Method: Vibrating tube method
+Phase(s): Liquid
+Data columns:
+  1) Temperature/K
+  2) Pressure/kPa
+  3) Specific_density[Liquid]/kg/m3
+  4) Delta(prev)
+Data points: 65
+ILT2 setid: ZcjFu
+DOI: 10.1016/j.tca.2011.11.009 (score: 127.798130)
+URL: http://dx.doi.org/10.1016/j.tca.2011.11.009
+
+Ref. #1
+==========
+Property:
+  Specific density
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+For each reference the data points are stored in a separate \fBref%.dat\fP file.
+Here for example the first lines of \fBref0.dat\fP from the example:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+# Temperature/K  Pressure/kPa  Specific_density[Liquid]/kg/m3  Delta(prev)
++2.98150000e+02 +1.00000000e+02 +1.11670000e+03 +1.10000000e+00
++2.98150000e+02 +2.00000000e+02 +1.11670000e+03 +1.10000000e+00
++2.98150000e+02 +3.00000000e+02 +1.11670000e+03 +1.10000000e+00
++2.98150000e+02 +4.00000000e+02 +1.11680000e+03 +1.10000000e+00
++2.98150000e+02 +5.00000000e+02 +1.11680000e+03 +1.10000000e+00
++2.98150000e+02 +6.00000000e+02 +1.11690000e+03 +1.10000000e+00
++2.98150000e+02 +8.00000000e+02 +1.11690000e+03 +1.10000000e+00
+\&...
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH CITE
+.sp
+For the usage of the database ILThermo, \fInot\fP this software, please cite:
+.INDENT 0.0
+.INDENT 3.5
+.INDENT 0.0
+.IP 1. 3
+Kazakov, A.; Magee, J.W.; Chirico, R.D.; Paulechka, E.; Diky, V.; Muzny, C.D.; Kroenlein, K.; Frenkel, M. "NIST Standard Reference Database 147: NIST Ionic Liquids Database \- (ILThermo)", Version 2.0, National Institute of Standards and Technology, Gaithersburg MD, 20899, \fI\%http://ilthermo.boulder.nist.gov\fP\&.
+.IP 2. 3
+Dong, Q.; Muzny, C.D.; Kazakov, A.; Diky, V.; Magee, J.W.; Widegren, J.A.; Chirico, R.D.; Marsh, K.N.; Frenkel, M., "ILThermo: A Free\-Access Web Database for Thermodynamic Properties of Ionic Liquids." J. Chem. Eng. Data, 2007, 52(4), 1151\-1159, doi: 10.1021/je700171f.
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.SH AUTHOR
+Frank Roemer
+.SH COPYRIGHT
+2018, Frank Roemer
+.\" Generated by docutils manpage writer.
+.

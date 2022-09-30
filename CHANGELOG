@@ -1,0 +1,33 @@
+Changelog
+=========
+
+version 0.9.8
+-------------
+* keys for physical properties are resolved now just in time, see :data:`pyilt2.abr2key` and :data:`pyilt2.properties`.
+
+version 0.9.7
+-------------
+* update NIST hashes for physical properties in :data:`pyilt2.properties`
+* debug :attr:`pyilt2.reference.sref`
+
+version 0.9.6
+-------------
+* major bug fixing :doc:`pyilt2report` and :class:`pyilt2.dataset`
+* add cache to :func:`pyilt2.report.citation2doi`
+* clean up code
+
+version 0.9.5
+-------------
+* add command line tool :doc:`pyilt2report`
+* bug fixing setup
+
+version 0.9.2
+-------------
+* checked compatibility with python 3
+* add :meth:`pyilt2.dataset.write` to write data set to text file
+* add :class:`pyilt2.queryError` to handle errors from database
+* minor modifications
+
+version 0.9.1
+-------------
+* first beta release

@@ -1,0 +1,62 @@
+Metadata-Version: 1.1
+Name: pyilt2
+Version: 1.0.0
+Summary: A library to access the ILThermo v2.0 database.
+Home-page: http://wgserve.de/pyilt2
+Author: Frank Roemer
+Author-email: froemer76@googlemail.com
+License: MIT
+Description-Content-Type: UNKNOWN
+Description: **pyILT2** is a **python library** to access the `NIST`_ *Standard Reference Database #147*,
+        aka Ionic Liquids Database - `ILThermo v2.0`_ .
+        It comes with `pyilt2report`_ , a simple **command line tool for search** requests.
+        
+        .. note:: The author is not affiliated to the National Institute of Standards and Technology (NIST)!
+        
+        .. warning::
+        
+            There is no official web API available to access ILThermo, which could have been used here.
+            Therefore the *stability* of this library depends on the *stability* of the JSON/javascript framework of the webservice.
+        
+        
+        Documentation
+        -------------
+        
+        Documentation including installation procedure, tutorial and API:
+        http://wgserve.de/pyilt2/
+        
+        
+        Requirements
+        ------------
+        
+        * Python 2 or 3
+        * `NumPy`_
+        * `Requests`_: HTTP for Humans
+        
+        
+        Cite
+        ----
+        
+        For the usage of the database ILThermo, *not* this software, please cite:
+        
+           1. Kazakov, A.; Magee, J.W.; Chirico, R.D.; Paulechka, E.; Diky, V.; Muzny, C.D.; Kroenlein, K.; Frenkel, M. "NIST Standard Reference Database 147: NIST Ionic Liquids Database - (ILThermo)", Version 2.0, National Institute of Standards and Technology, Gaithersburg MD, 20899, http://ilthermo.boulder.nist.gov.
+           2.  Dong, Q.; Muzny, C.D.; Kazakov, A.; Diky, V.; Magee, J.W.; Widegren, J.A.; Chirico, R.D.; Marsh, K.N.; Frenkel, M., "ILThermo: A Free-Access Web Database for Thermodynamic Properties of Ionic Liquids." J. Chem. Eng. Data, 2007, 52(4), 1151-1159, doi: 10.1021/je700171f.
+        
+        
+        .. _ILThermo v2.0: http://ilthermo.boulder.nist.gov/
+        .. _NumPy: http://www.numpy.org/
+        .. _Requests: http://docs.python-requests.org/en/master/
+        .. _pyilt2report: http://wgserve.de/pyilt2/pyilt2report.html
+        .. _NIST: https://www.nist.gov/
+Keywords: ILThermo,Ionic Liquids Database
+Platform: UNKNOWN
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Database :: Front-Ends
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
