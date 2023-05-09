@@ -3,6 +3,9 @@
     - v0.9.8 to v1.0.0
     - Fix bug of property search
     - Update information is available on the bottom of this page
+## Addded JSON data to convert compound names to SMILES (2023/5/10)
+    - There should be some mistakes because it was semiautomatically made.
+    
 ## Install
 pip3 install --force-reinstall git+https://github.com/KanHatakeyama/pyILT2.git
 
